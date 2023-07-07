@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce/const/product_detail.dart';
 import 'package:ecommerce/controller/shopprovider.dart';
-import 'package:ecommerce/model/bottomnavbar.dart';
-import 'package:ecommerce/model/customcontainer.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
+
+import '../const/customcontainer.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -75,17 +77,15 @@ class _HomePageState extends State<HomePage> {
                             crossAxisSpacing: 16,
                             mainAxisSpacing: 16,
                             itemBuilder: (context, index) {
+                              final products = productProviderr.products;
+                              final product = products[index];
                               return GestureDetector(
                                 onTap: () {
-                                  final id = Provider.of<ShopProvider>(context,
-                                          listen: false)
-                                      .products[index];
-                                  productProviderr.fetchDetails(id.toString());
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            SecondScreen(id: id.toString()),
+                                        builder: (context) => SecondScreen(
+                                            id: product.id.toString()),
                                       ));
                                 },
                                 child: ProductTile(

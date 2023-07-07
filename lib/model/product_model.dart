@@ -61,3 +61,26 @@ class Rating {
         "count": count,
       };
 }
+
+class Product {
+  final int id;
+  final String title;
+  final double price;
+  int quantity;
+
+  Product({
+    required this.id,
+    required this.title,
+    required this.price,
+    required this.quantity,
+  });
+}
+
+class Cart {
+  List<Product> products = [];
+
+  double get totalAmount {
+    return products.fold(
+        0, (sum, product) => sum + (product.price * product.quantity));
+  }
+}
